@@ -7,6 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Error {
+
+    @Getter
+    private final String advice = "Contact your support";
+
     @Getter
     private final List<String> messages = new ArrayList<>();
 
