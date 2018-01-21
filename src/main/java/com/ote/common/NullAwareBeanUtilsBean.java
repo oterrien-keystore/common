@@ -6,17 +6,17 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
-public final class BeanUtils extends BeanUtilsBean {
+public final class NullAwareBeanUtilsBean extends BeanUtilsBean {
 
-    private final List<String> propertiesToKeep;
+    private final List<String> propertiesToKeepEvenIfNull;
 
-    public BeanUtils(String... propertiesToKeep) {
-        this.propertiesToKeep = Arrays.asList(propertiesToKeep);
+    public NullAwareBeanUtilsBean(String... propertiesToKeepEvenIfNull) {
+        this.propertiesToKeepEvenIfNull = Arrays.asList(propertiesToKeepEvenIfNull);
     }
 
     @Override
     public void copyProperty(Object dest, String name, Object value) throws IllegalAccessException, InvocationTargetException {
-        if (propertiesToKeep.contains(name) || value == null) return;
+        if (propertiesToKeepEvenIfNull.contains(name) || value == null) return;
         super.copyProperty(dest, name, value);
     }
 
