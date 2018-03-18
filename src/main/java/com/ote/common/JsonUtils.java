@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import lombok.NoArgsConstructor;
 
 import java.io.IOException;
+import java.util.List;
 
 @NoArgsConstructor
 public final class JsonUtils {
@@ -21,6 +22,10 @@ public final class JsonUtils {
 
     public static <T> T parse(String content, Class<T> type) throws IOException {
         return MAPPER.readValue(content, type);
+    }
+
+    public static <T> List<T> parseFromJsonList(String content, Class<T> genericType) throws IOException {
+        return MAPPER.readValue(content, MAPPER.getTypeFactory().constructCollectionType(List.class, genericType));
     }
 
     public static <T> String serialize(T obj) throws IOException {
